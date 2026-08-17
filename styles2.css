@@ -1,0 +1,546 @@
+@import url('https://googleapis.com');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    -webkit-user-select: none;
+    user-select: none;
+}
+
+:root {
+    --bg-start: #FFF2F6;
+    --bg-end: #EBC6DB;
+    --accent: #E84A74;
+    --text-dark: #2C2528;
+    --text-muted: #7A6E73;
+}
+
+html {
+    width: 100%;
+    min-height: 100%;
+    overflow-x: hidden;
+    overflow-y: auto;
+}
+
+body {
+    width: 100%;
+    min-height: 100vh;
+    margin: 0;
+    overflow-x: hidden;
+    overflow-y: visible;
+    font-family: "Poppins", sans-serif;
+    color: var(--text-dark);
+    background: linear-gradient(180deg, var(--bg-start) 0%, var(--bg-end) 100%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.content-container {
+    width: 100%;
+    max-width: 1200px;
+    min-height: 100vh;
+    margin: 0 auto;
+    padding: 140px 40px 100px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    gap: 50px;
+    animation: siteFadeIn 1.5s ease-in-out forwards;
+}
+
+body > header {
+    position: absolute;
+    top: 0;
+    right: 0;
+    left: 0;
+    width: 100%;
+    height: auto;
+    margin: 0;
+    padding: 25px 60px;
+    z-index: 999;
+    background: rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border-bottom: 2px solid rgba(36, 23, 32, 0.501);
+}
+
+.nav ul {
+    list-style: none;
+    display: flex;
+    align-items: center;
+    width: 100%;
+}
+
+.nav-logo {
+    font-weight: 600;
+    letter-spacing: 2px;
+    color: var(--text-dark);
+    font-size: 15px;
+    transition: color 0.3s ease;
+}
+
+.nav-logo:hover {
+    color: var(--accent);
+}
+
+.nav ul li:first-child {
+    margin-right: auto;
+}
+
+.nav ul li:not(:first-child) {
+    margin-left: 45px;
+}
+
+.nav ul li a {
+    text-decoration: none;
+    color: var(--text-dark);
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: 1.5px;
+    transition: color 0.3s ease;
+}
+
+.nav ul li a:hover {
+    color: var(--accent);
+}
+
+.left-content-area {
+    flex: 1;
+    max-width: 460px;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+main .subtitle {
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 3px;
+    color: var(--text-muted);
+    margin-bottom: 15px;
+}
+
+main h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: 60px;
+    font-weight: 400;
+    line-height: 1.15;
+    margin-bottom: 25px;
+}
+
+main h1 span.highlight {
+    font-style: italic;
+    color: var(--accent);
+    font-family: 'Playfair Display', serif;
+}
+
+main .description {
+    font-size: 15px;
+    font-weight: 300;
+    line-height: 1.7;
+    color: var(--text-muted);
+}
+
+.decorLine {
+    position: relative;
+    text-align: center;
+    margin-top: 10px;
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    width: 100%;
+    height: 20px;
+}
+
+.decorLine::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 50%;
+    width: 100%;
+    height: 1px;
+    background-color: #000000;
+    z-index: 1;
+}
+
+.decorLine::after {
+    content: "♥";
+    font-size: 18px;
+    color: #DC143C;
+    position: relative;
+    z-index: 2;
+    margin: 0 auto;
+    padding: 0 15px;
+    background: #FFF2F6;
+}
+
+.memory-textbox {
+    background: rgba(255, 255, 255, 0.4);
+    border: 1px solid rgba(232, 74, 116, 0.2);
+    border-radius: 12px;
+    padding: 20px 25px;
+    min-height: 110px;
+    display: flex;
+    align-items: center;
+    box-shadow: 0 8px 25px rgba(232, 74, 116, 0.05);
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+}
+
+#dynamic-text {
+    width: 100%;
+    font-size: 15px;
+    font-weight: 400;
+    line-height: 1.6;
+    color: var(--text-dark);
+    font-style: italic;
+}
+
+.book-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 25px;
+    position: relative;
+}
+
+.flipbook {
+    width: 600px;
+    height: 400px;
+    position: relative;
+}
+
+.book-wrapper::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: calc(100% - 75px);
+    border-radius: 8px;
+    box-shadow:
+        0 0 0 10px #000000,
+        0 20px 50px rgba(44, 37, 40, 0.12);
+    pointer-events: none;
+    z-index: 99;
+    outline: 2px solid transparent;
+    transition: outline-color 0.3s ease;
+}
+
+.book-wrapper:hover::after {
+    outline-color: var(--text-dark);
+}
+
+.flipbook .page {
+    background-color: #fff;
+    overflow: hidden;
+}
+
+.flipbook img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    pointer-events: none;
+    -webkit-user-drag: none;
+    text-indent: -9999px;
+    color: transparent;
+}
+
+.book-controls {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    align-items: center;
+    z-index: 100;
+}
+
+.arrow-btn {
+    background: rgba(255, 255, 255, 0.3);
+    border: 1px solid rgba(44, 37, 40, 0.15);
+    color: var(--text-dark);
+    font-size: 20px;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 10px rgba(44, 37, 40, 0.05);
+}
+
+.arrow-btn:hover {
+    background: var(--text-dark);
+    color: #ffffff;
+    transform: translateY(-2px);
+}
+
+.arrow-btn:active {
+    transform: translateY(0);
+}
+
+.burger-menu {
+    background: none;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    padding: 6px;
+    z-index: 210;
+    justify-content: center;
+    align-items: center;
+}
+
+.burger-menu span {
+    display: inline-block;
+    width: 24px;
+    height: 2px;
+    background-color: var(--text-dark);
+    border-radius: 2px;
+    transition: background-color 0.3s ease;
+}
+
+.burger-menu:hover span {
+    background-color: var(--accent);
+}
+
+.menu-overlay {
+    position: fixed;
+    top: 0;
+    right: -400px;
+    width: 380px;
+    height: 100vh;
+    background: rgba(255, 255, 255, 0.85);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    box-shadow: -10px 0 30px rgba(44, 37, 40, 0.08);
+    z-index: 100000;
+    transition: right 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    padding: 60px 40px;
+    display: flex;
+    flex-direction: column;
+}
+
+.menu-overlay.open {
+    right: 0;
+}
+
+.close-menu {
+    position: absolute;
+    top: 25px;
+    right: 40px;
+    background: none;
+    border: none;
+    font-size: 35px;
+    color: var(--text-dark);
+    cursor: pointer;
+    transition: color 0.3s ease;
+}
+
+.close-menu:hover {
+    color: var(--accent);
+}
+
+.overlay-content h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 26px;
+    margin-bottom: 10px;
+}
+
+.menu-divider {
+    width: 60px;
+    height: 2px;
+    background-color: var(--accent);
+    margin-bottom: 40px;
+}
+
+.overlay-content ul {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+}
+
+.menu-link {
+    text-decoration: none;
+    color: var(--text-dark);
+    font-size: 16px;
+    font-weight: 500;
+    display: block;
+    transition: all 0.3s ease;
+}
+
+.menu-link:hover {
+    color: var(--accent);
+    transform: translateX(5px);
+}
+
+.active-gift {
+    color: var(--accent);
+    font-weight: 600;
+}
+
+/* FIXED FOOTER RULES */
+body > footer {
+    position: fixed !important;
+    left: 0 !important;
+    right: 0 !important;
+    bottom: 0 !important;
+    width: 100% !important;
+    height: auto !important;
+    margin: 0 !important;
+    padding: 20px 15px !important;
+    z-index: 99999 !important;
+    background: rgba(255, 242, 246, 0.85) !important;
+    backdrop-filter: blur(6px) !important;
+    -webkit-backdrop-filter: blur(6px) !important;
+    text-align: center !important;
+    pointer-events: none;
+}
+
+body > footer p {
+    margin: 0 !important;
+    color: var(--text-muted) !important;
+    font-size: 12px !important;
+    font-weight: 500 !important;
+    letter-spacing: 2px !important;
+    line-height: 1 !important;
+    text-transform: uppercase !important;
+    opacity: 0.8 !important;
+}
+
+@keyframes siteFadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+@media (max-width: 850px) {
+    html {
+        overflow-x: hidden !important;
+        overflow-y: auto !important;
+    }
+
+    body {
+        min-height: 100vh !important;
+        overflow-x: hidden !important;
+        overflow-y: visible !important;
+    }
+
+    body > header {
+        position: absolute !important;
+        top: 0 !important;
+        right: 0 !important;
+        left: 0 !important;
+        width: 100% !important;
+        height: auto !important;
+        padding: 15px 20px !important;
+        z-index: 999 !important;
+    }
+
+    body > footer {
+        position: fixed !important;
+        bottom: 0 !important;
+        left: 0 !important;
+        right: 0 !important;
+        width: 100% !important;
+        padding: 15px 10px !important;
+    }
+
+    body > footer p {
+        font-size: 10px !important;
+        letter-spacing: 1.5px !important;
+    }
+
+    .content-container {
+        width: 100%;
+        min-height: 100vh;
+        height: auto;
+        padding: 100px 20px 80px; /* Bottom padding keeps content above fixed footer */
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: center;
+        gap: 40px;
+    }
+
+    .left-content-area {
+        width: 100%;
+        max-width: 700px;
+        text-align: center;
+        align-items: center;
+    }
+
+    main h1 {
+        font-size: 40px;
+        line-height: 1.15;
+    }
+
+    main .description {
+        font-size: 14px;
+        line-height: 1.7;
+    }
+
+    .decorLine {
+        justify-content: center;
+    }
+
+    .memory-textbox {
+        width: 100%;
+        min-height: 90px;
+    }
+
+    .flipbook {
+        width: 320px;
+        height: 213px;
+    }
+
+    .book-wrapper::after {
+        box-shadow:
+            0 0 0 10px #000000,
+            0 15px 35px rgba(44, 37, 40, 0.1);
+        
+    }
+
+    .menu-overlay {
+        width: 100%;
+        right: -100%;
+    }
+}
+
+@media (max-width: 500px) {
+    body > header {
+        padding: 12px 15px !important;
+    }
+
+    body > footer {
+        padding: 12px 10px !important;
+    }
+
+    body > footer p {
+        font-size: 8px !important;
+        letter-spacing: 1px !important;
+    }
+
+    .content-container {
+        padding: 90px 18px 70px;
+    }
+
+    main h1 {
+        font-size: 34px;
+    }
+
+    main .description {
+        font-size: 13px;
+    }
+}

@@ -1,0 +1,78 @@
+.content-container .right-content-area {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    max-width: 500px;
+}
+
+
+.stylized-message-box {
+    width: 100%;
+    max-width: 440px;
+    height: 400px; 
+    background: #ffffff !important; 
+    border: 1px solid rgba(44, 37, 40, 0.08) !important;
+    border-radius: 16px;
+    padding: 35px 30px;
+    box-shadow: 0 10px 30px rgba(44, 37, 40, 0.03); 
+    overflow: hidden; 
+    position: relative;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+
+.stylized-message-box:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 15px 35px rgba(232, 74, 116, 0.08);
+    border-color: rgba(232, 74, 116, 0.2) !important;
+}
+
+
+.inner-scroll-container {
+    width: 100%;
+    height: 100%;
+    overflow-y: auto; 
+    padding-right: 12px; 
+}
+
+
+.inner-scroll-container::-webkit-scrollbar {
+    width: 4px; 
+}
+.inner-scroll-container::-webkit-scrollbar-thumb {
+    background: rgba(232, 74, 116, 0.25); 
+    border-radius: 4px;
+}
+.inner-scroll-container::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+
+.inner-scroll-container p {
+    font-family: 'Poppins', sans-serif;
+    font-size: 14px;
+    line-height: 1.75;
+    color: var(--text-dark);
+    margin-bottom: 20px; 
+    font-weight: 400;
+}
+
+.inner-scroll-container p:last-child {
+    margin-bottom: 0; 
+}
+
+
+@media (max-width: 850px) {
+    .stylized-message-box {
+        max-width: 340px; 
+        height: 320px; 
+        padding: 25px 20px;
+        margin-top: 20px;
+    }
+    
+    .inner-scroll-container p {
+        font-size: 13px; 
+        line-height: 1.65;
+    }
+}

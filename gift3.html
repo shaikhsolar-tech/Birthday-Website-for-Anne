@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Gift #3: Anne's Kitchen Collection</title>
+
+    <link rel="preconnect" href="https://googleapis.com">
+    <link rel="preconnect" href="https://gstatic.com" crossorigin>
+    <link rel="stylesheet" href="styles2.css?v=4.0"/>
+    <link rel="stylesheet" href="styles3.css"/>
+</head>
+<body>
+
+    
+    <div class="content-container">
+        
+       
+        <div class="left-content-area">
+            <main>
+                <p class="subtitle">SOMETHING FOR YOUR CHEFS!</p>
+                <h1>Recipes <span class="highlight">for Anne</span></h1>
+                <div class="decorLine"></div><p class="description">I have been thinking of ways to be in your life while being so far away and then I realized I could do this! If you like these, I'll send you the instructions soon enough. Enjoy :></p>
+                
+            </main>
+        </div>
+
+        
+               
+        <div class="right-content-area">
+            <div class="recipe-accordion-container">
+                
+               
+                <div class="accordion-item">
+                    <button class="accordion-trigger">
+                        <span class="recipe-title">The Anneco</span>
+                    </button>
+                   
+                    <div class="accordion-dropdown">
+                        <div class="dropdown-inner-content">
+                            <p>The Anneaco is designed to deliver a smooth, rising wave of heat using simple, clever cooking tricks. It starts with a razor-thin, freshly made corn tortilla lightly brushed with rendered beef fat, keeping it super soft while stopping it from getting soggy. Inside is juicy chicken thigh cooked gently so it keeps a satisfying, bouncy bite that makes you chew a little longer, un-locking more flavor from a homemade chili-infused oil. It's topped with a piece of ultra-crisp chicken skin dusted with tangy dried chili powder for a sharp crunch. Instead of heavy melted cheese, a velvety, smooth cheese sauce made with Monterey Jack and Gruyère coats your mouth, spreading the heat evenly without getting greasy. Tiny bites of diced tomatoes soaked in lime juice pop in your mouth, clearing away the rich cheese right before your next bite. Finally, a thick, sweet-and-spicy chili sauce is squeezed heavily in the middle and dotted lightly toward the edges. Two quick flicks of the wrist spread the sauce out into subtle rings, making every bite hotter than the last as you eat your way to the center ♥</p>
+                        </div>
+                    </div>
+                </div>
+
+                
+                <div class="accordion-item">
+                    <button class="accordion-trigger">
+                        <span class="recipe-title">Anne's Absolute Best Mango Ice Cream</span>
+                    </button>
+                    <div class="accordion-dropdown">
+                        <div class="dropdown-inner-content">
+                            <p>Anne’s Best Mango Ice Cream is an ultra-luxurious, scientifically engineered frozen dessert crafted to deliver a lush tropical punch followed by an unnaturally long, lingering finish. The base relies on high-terpene Alphonso or Kesar mango puree folded into a fat matrix of heavy cream blended with cultured crème fraîche, which introduces a subtle lactic tang that stimulates continuous salivation. Rather than using harsh artificial sweeteners that ruin mouthfeel, the mix is sweetened with a balance of cane sugar and liquid wildflower honey to suppress ice crystal formation and lower the freezing point, guaranteeing a velvet-smooth, scoopable texture. The secret counter-ingredient—green cardamom pods lightly steeped into the warm dairy base—mirrors the natural terpene structure of the fruit, acting as a botanical anchor. As the rich cream melts across the tongue, this cardamom-honey-lipid bond traps the volatile fruit aromatics, coating the oral cavity and releasing retro-nasal "echoes" of vibrant, floral mango that stay on the breath long after the scoop is gone. ♥</p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+
+    
+    <script src="jquery.js"></script>
+    <script src="shared.js"></script>
+    <script>
+    $(document).ready(function() {
+        $(".accordion-trigger").on("click", function(e) {
+            e.preventDefault();
+            
+            const parentItem = $(this).closest(".accordion-item");
+            const targetDropdown = parentItem.find(".accordion-dropdown");
+            
+            
+            if (parentItem.hasClass("open")) {
+                
+                targetDropdown.animate({ "max-height": "0px" }, 400, "swing", function() {
+                    parentItem.removeClass("open");
+                });
+            } else {
+                
+                
+                
+                const fullContentHeight = targetDropdown.find(".dropdown-inner-content").outerHeight() + "px";
+                
+                
+                targetDropdown.animate({ "max-height": fullContentHeight }, 450, "swing", function() {
+                    parentItem.addClass("open");
+                });
+            }
+        });
+    });
+</script>
+
+</body>
+</html>
+

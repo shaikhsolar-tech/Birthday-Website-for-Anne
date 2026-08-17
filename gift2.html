@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Birthday Anne!</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="styles2.css?v=3.0">
+</head>
+
+<body>
+
+    <div class="content-container">
+
+        <div class="left-content-area">
+            <main>
+                <p class="subtitle">A LITTLE SOMETHING</p>
+
+                <h1>Made just <span class="hightlight">for you.</span></h1>
+
+                <div class="decorLine"></div>
+
+                <p class="description">
+                    A collection of memories, words, pictures and little things I wanted you to see.
+                    Open the postcard!
+                </p>
+            </main>
+
+            <aside class="memory-textbox">
+                <p id="dynamic-text">
+                    Welcome to your postcard! Flip the pages to see more... ♥
+                </p>
+            </aside>
+        </div>
+
+        <section class="book-wrapper" aria-label="Postcard Flipbook">
+            <div class="flipbook">
+                <div class="hard page">
+                    <img src="HAPPY BIRTHDAY ANNE.png" alt="Postcard Front Cover" loading="eager">
+                </div>
+
+                <div class="page">
+                    <img src="image1.png" alt="Postcard Page 2" loading="lazy">
+                </div>
+
+                <div class="page">
+                    <img src="image2.png" alt="Postcard Page 3" loading="lazy">
+                </div>
+
+                <div class="page">
+                    <img src="image3.png" alt="" loading="lazy">
+                </div>
+
+                <div class="page">
+                    <img src="image4.png" alt="" loading="lazy">
+                </div>
+
+                <div class="page">
+                    <img src="image5.png" alt="Postcard Page 6" loading="lazy">
+                </div>
+
+                <div class="page">
+                    <img src="image6.png" alt="Postcard Page 7" loading="lazy">
+                </div>
+
+                <div class="page">
+                    <img src="image7.png" alt="Postcard Page 8" loading="lazy">
+                </div>
+
+                <div class="page">
+                    <img src="image8.png" alt="Postcard Page 9" loading="lazy">
+                </div>
+
+                <div class="hard page">
+                    <img src="image9.png" alt="Postcard Back Cover" loading="lazy">
+                </div>
+            </div>
+
+            <div class="book-controls">
+                <button id="book-prev-arr" class="arrow-btn" aria-label="Previous Page">←</button>
+                <button id="book-next-arr" class="arrow-btn" aria-label="Next Page">→</button>
+            </div>
+        </section>
+
+    </div>
+
+    <script src="jquery.js"></script>
+    <script src="turn.js"></script>
+    <script src="shared.js"></script>
+    <script>
+    $(document).ready(function () {
+        
+        const spreadTexts = {
+            1: "Welcome to your postcard! Flip the pages to see more... ♥", // Cover (Page 1)
+            2: "I told you I'd send you these photos soon enough~",          // Spread 1 (Pages 2-3)
+            3: "An interesting text... plus some stuff :p.",                 // Spread 2 (Pages 4-5)
+            4: "Images of the sexiest lady on the planet!",                
+            5: "Some of your favourite foods...",                          
+            6: "Happy Birthday Anne! Birthday Gift #2 ends here ♥"          // Back Cover
+        };
+
+        const flipbook = $(".flipbook");
+
+        if (!$.isFunction(flipbook.turn)) {
+            return;
+        }
+
+        flipbook.turn({
+            width: 600,
+            height: 400,
+            autoCenter: false,
+            acceleration: true,
+            gradients: true,
+            elevation: 40
+        });
+
+        function handleResponsiveScaling() {
+            const screenWidth = window.innerWidth;
+
+            if (screenWidth <= 850) {
+                const scaleRatio = Math.min(
+                    340 / 600,
+                    (screenWidth - 40) / 600
+                );
+
+                flipbook.turn("zoom", scaleRatio);
+            } else {
+                flipbook.turn("zoom", 1);
+            }
+        }
+
+        handleResponsiveScaling();
+
+        let resizeTimer;
+
+        $(window).on("resize", function () {
+            clearTimeout(resizeTimer);
+            resizeTimer = setTimeout(handleResponsiveScaling, 100);
+        });
+
+        
+        flipbook.on("turned", function (event, page) {
+            const view = flipbook.turn("view");
+            
+            let spreadIndex;
+
+            if (view[0] === 0) {
+                
+                spreadIndex = 1;
+            } else if (view[1] === 0) {
+                // Back Cover
+                spreadIndex = Object.keys(spreadTexts).length;
+            } else {
+                
+                spreadIndex = Math.floor(view[0] / 2) + 1;
+            }
+
+            const targetText = spreadTexts[spreadIndex] || "Enjoy the memories! ♥";
+
+            $("#dynamic-text")
+                .stop(true, true)
+                .fadeOut(150, function () {
+                    $(this).text(targetText).fadeIn(200);
+                });
+        });
+
+        $("#book-next-arr").on("click", function (e) {
+            e.preventDefault();
+            flipbook.turn("next");
+        });
+
+        $("#book-prev-arr").on("click", function (e) {
+            e.preventDefault();
+            flipbook.turn("previous");
+        });
+    });
+</script>
+
+</body>
+</html>

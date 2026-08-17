@@ -1,0 +1,121 @@
+
+.content-container .right-content-area .recipe-accordion-container {
+    width: 400px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px; 
+    transform: translateY(-80px); 
+}
+
+
+.accordion-item {
+    background: #ffffff !important; 
+    border: 1px solid rgba(44, 37, 40, 0.08) !important;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 15px rgba(44, 37, 40, 0.03); 
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    
+    
+    margin-top: 20px; 
+    transform: translateY(15px);
+}
+
+
+.accordion-trigger {
+    width: 100%;
+    background: none;
+    border: none;
+    padding: 22px 25px; 
+    display: flex;
+    
+    
+    justify-content: center; 
+    
+    
+    align-items: center; 
+    
+    cursor: pointer;
+    
+    
+    text-align: center; 
+    
+    outline: none !important;
+    -webkit-tap-highlight-color: transparent;
+}
+
+
+.recipe-title {
+    font-family: 'Poppins', sans-serif; 
+    font-size: 13px;
+    font-weight: 600;
+    text-transform: uppercase; 
+    letter-spacing: 2px;
+    color: var(--text-dark);
+    line-height: 1.4;
+    text-align: center;
+}
+
+
+.accordion-item:hover {
+    
+    transform: translateY(-2px); 
+    box-shadow: 0 8px 25px rgba(232, 74, 116, 0.08);
+    border-color: rgba(232, 74, 116, 0.25) !important;
+}
+
+
+.accordion-item.open {
+    box-shadow: 0 12px 30px rgba(232, 74, 116, 0.1);
+    border-color: rgba(232, 74, 116, 0.3) !important;
+}
+
+
+.accordion-dropdown {
+    max-height: 0px; 
+    overflow: hidden; 
+}
+
+
+
+.dropdown-inner-content {
+    padding: 5px 25px 25px 25px; 
+    border-top: 1px solid rgba(44, 37, 40, 0.04); 
+}
+
+.dropdown-inner-content p {
+    font-size: 14px;
+    line-height: 1.6;
+    color: var(--text-muted);
+    font-style: italic;
+    margin-top: 15px;
+}
+
+
+@media (max-width: 850px) {
+    .content-container .right-content-area .recipe-accordion-container {
+        width: 100%;
+        max-width: 340px; 
+        transform: translateY(0) !important;
+        margin-top: 20px;
+        gap: 10px; 
+    }
+    
+    .accordion-item {
+        
+        margin-top: 15px !important; 
+    }
+    
+    .accordion-trigger { 
+        padding: 18px 20px; 
+    }
+    
+    .recipe-title { 
+        font-size: 11px; 
+        letter-spacing: 1.5px; 
+    }
+    
+    .dropdown-inner-content { 
+        padding: 5px 20px 20px 20px; 
+    }
+}
